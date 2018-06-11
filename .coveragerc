@@ -1,0 +1,8 @@
+[run]
+branch = true
+
+[report]
+omit =
+    python/guiderQA/etc/*
+    python/guiderQA/misc/*
+    python/guiderQA/tests/*
