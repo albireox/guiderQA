@@ -281,6 +281,13 @@ class MyLogger(Logger):
 
             self.log_filename = log_file_path
 
+    def setLevel(self, level):
+
+        self.sh.setLevel(level)
+
+        if self.fh:
+            self.fh.setLevel(level)
+
 
 logging.setLoggerClass(MyLogger)
 log = logging.getLogger(__name__)
