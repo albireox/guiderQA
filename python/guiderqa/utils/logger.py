@@ -186,7 +186,7 @@ class MyLogger(Logger):
 
     def _show_warning(self, message, category, *args, **kwargs):
 
-        if not issubclass(category, exceptions.GuiderqaWarning):
+        if not issubclass(category, exceptions.GuiderQAWarning):
             warnings._showwarning_orig(message, category, *args, **kwargs)
             return
 
@@ -221,9 +221,6 @@ class MyLogger(Logger):
         # Remove all previous handlers
         for handler in self.handlers[:]:
             self.removeHandler(handler)
-
-        # Set levels
-        self.setLevel(logging.DEBUG)
 
         # Set up the stdout handler
         self.fh = None
@@ -282,6 +279,7 @@ class MyLogger(Logger):
             self.log_filename = log_file_path
 
     def setLevel(self, level):
+        """Sets levels for both sh and (if initialised) fh."""
 
         self.sh.setLevel(level)
 
@@ -289,6 +287,6 @@ class MyLogger(Logger):
             self.fh.setLevel(level)
 
 
-logging.setLoggerClass(MyLogger)
-log = logging.getLogger(__name__)
+# logging.setLoggerClass(MyLogger)
+log = MyLogger(__name__)
 log._set_defaults()  # Inits sh handler

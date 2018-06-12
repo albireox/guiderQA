@@ -4,5 +4,5 @@ branch = true
 [report]
 omit =
     python/guiderQA/etc/*
-    python/guiderQA/misc/*
+    python/guiderQA/utils/*
     python/guiderQA/tests/*
