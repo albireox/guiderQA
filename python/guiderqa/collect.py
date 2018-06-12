@@ -127,7 +127,7 @@ def collect(path, mjd0, mjd1=None, outfile='guiderqa.db', split_db=False):
 
     for proc_path in tqdm.tqdm(proc_paths, total=nfiles):
 
-        hdu = astropy.io.open(proc_path)[0].verify('silentfix')
+        hdu = astropy.io.fits.open(proc_path)[0].verify('silentfix')
         header = hdu.header
 
         if header['IMAGETYP'] == 'dark':
