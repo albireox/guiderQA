@@ -167,8 +167,11 @@ def collect(path, mjd0, mjd1=None, outfile='guiderqa.db', split_db=False):
         with models.database.atomic():
             header_dbo = full_header_model.get_or_create(frame_pk=frame_dbo.pk, extension=0)[0]
             header_blob = bytes(header.tostring(), 'utf-8')
-            full_header_model.update(header_blob=header_blob, **header_values).where(
-                full_header_model.pk == header_dbo.pk).execute()
+            try:
+                full_header_model.update(header_blob=header_blob, **header_values).where(
+                    full_header_model.pk == header_dbo.pk).execute()
+            except ValueError:
+                continue
 
         if bintable is None:
             continue
