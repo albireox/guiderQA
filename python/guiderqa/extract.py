@@ -114,7 +114,6 @@ def extract_header(mjds, path, keywords, dtypes=None, split_dbs=False, is_range=
         if not failed:
             dataframe = dataframe[dataframe > -999.]
 
-    # dataframe = dataframe.orderby(['mjd', 'frame'])
     dataframe = dataframe.set_index(['mjd', 'frame'])
     dataframe.sort_index(inplace=True)
 
