@@ -131,7 +131,9 @@ def collect(path, mjd0, mjd1=None, outfile='guiderqa.db', split_db=False):
         hdu.verify('silentfix')
         header = hdu.header
 
-        if header['IMAGETYP'] == 'dark':
+        if 'IMAGETYP' not in header:
+            continue
+        elif header['IMAGETYP'] == 'dark':
             bintable = None
         else:
             bintable = astropy.table.Table.read(proc_path)
