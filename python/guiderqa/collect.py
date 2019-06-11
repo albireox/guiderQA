@@ -136,7 +136,10 @@ def collect(path, mjd0, mjd1=None, outfile='guiderqa.db', split_db=False):
         elif header['IMAGETYP'] == 'dark':
             bintable = None
         else:
-            bintable = astropy.table.Table.read(proc_path)
+            try:
+                bintable = astropy.table.Table.read(proc_path)
+            except ValueError:
+                continue
 
         mjd, frame = re.search('([0-9]*)/proc-gimg-([0-9]*)', str(proc_path)).groups()
         mjd = int(mjd)
